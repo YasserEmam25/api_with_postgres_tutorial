@@ -1,8 +1,11 @@
 import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
+import users_routes from './handlers/users';
 
 const app = express();
-const PORT = process.env;
+const { PORT } = process.env;
+
+app.use(bodyParser.json());
 
 app.get('/api/users', (req: Request, res:Response) => {
     try {
@@ -13,6 +16,8 @@ app.get('/api/users', (req: Request, res:Response) => {
         console.log('====================================');
     }
 })
+
+users_routes(app);
 
 app.get('/api/users/:id', (req: Request, res:Response) => {
     try {
